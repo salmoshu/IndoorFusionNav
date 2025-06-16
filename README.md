@@ -1,8 +1,10 @@
-# Location
+# IndoorFusionNav
 
-**Location**是一个多源数据融合定位的科研项目，目前包含了Wi-Fi指纹定位、行人航位推算（PDR）与基于EKF的Wi-Fi指纹与PDR的融合定位，本项目针对的平台为安卓平台，融合使用的数据为Wi-Fi数据、加速度计数据、陀螺仪数据、重力传感器数据、姿态仰角数据。
+**IndoorFusionNav**是一个基于Wi-Fi/PDR（行人航位推算）的多源融合定位项目，目前包含了Wi-Fi指纹定位、PDR与EKF融合定位的Python实现，本项目针对的平台为安卓平台，融合使用的数据为Wi-Fi数据与IMU数据。
 
-需要注意的是，安卓平台主要用于采集实验数据，数据分析与定位轨迹生成主要使用Python离线完成。
+项目中涉及的Java代码主要用于采集实验数据，而数据分析与定位轨迹生成主要使用Python离线完成。该项目较为久远，在数据采集和融合时没有很好地注意不同数据源之间的时间同步问题（应当进行插值或外推）。不过这并不影响大家通过项目源码来理解Wi-Fi指纹、PDR和EKF等定位领域中的基础概念。
+
+最后，该项目只是一个入门的科研项目，让初次涉猎该领域的同学能够快速上手。doc目录下提供了笔者的大论文，仅供参考。
 
 # 目录
 
@@ -36,7 +38,7 @@
 
 # 开始使用
 
-Location的使用前提：操作的文件格式大概为如下所示，其中rssi根据实验过程中AP数量决定，AP为指定的固定路由器，比较适合小范围实验。
+IndoorFusionNav的使用前提：操作的文件格式大概为如下所示，其中rssi根据实验过程中AP数量决定，AP为指定的固定路由器，比较适合小范围实验。
 
 | timestamp     | rssi1 | rssi2 | rssi3 | rssi4 | linear-x | linear-y | linear-z | gravity-x | gravity-y | gravity-z | rotation-x | rotation-y | rotation-z | rotation-w |
 | ------------- | ----- | ----- | ----- | ----- | -------- | -------- | -------- | --------- | --------- | --------- | ---------- | ---------- | ---------- | ---------- |
@@ -90,7 +92,7 @@ pdr.show_steps(frequency=70, walkType='normal')
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_1.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_1.png)
 
 示例2，对fusion01/SType中的数据进行分析。
 
@@ -100,7 +102,7 @@ pdr.show_steps(frequency=70, walkType='abnormal')
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_2.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_2.png)
 
 可以发现，对比示例1中的结果，该图峰值之间的间隔比较大。
 
@@ -122,7 +124,7 @@ pdr.show_gaussian(acc_z, True)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_3.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_3.png)
 
 示例2，对data/linear_08m中的数据及进行分析：
 
@@ -133,7 +135,7 @@ pdr.show_gaussian(acc_z, False)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_4.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_4.png)
 
 ### Demo1.3 show_data函数：查看三轴加速度的分布情况
 
@@ -153,7 +155,7 @@ pdr.show_data("linear")
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_5.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_5.png)
 
 示例2，对data/linear_08m中的数据及行分析：
 
@@ -163,7 +165,7 @@ pdr.show_data("gravity")
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_6.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_6.png)
 
 示例3，对data/linear_08m中的数据及行分析：
 
@@ -173,7 +175,7 @@ pdr.show_data("rotation")
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_7.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_7.png)
 
 ### Demo1.4 step_stride函数：步长推算函数
 
@@ -312,7 +314,7 @@ pdr.show_trace(frequency=70, walkType='abnormal', initPosition=(2,1))
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_8.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_8.png)
 
 示例2，显示data/fusion/LType数据的预测轨迹图：
 
@@ -322,7 +324,7 @@ pdr.show_trace(frequency=70, walkType='abnormal', offset=0, real_trace=real_trac
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo1_9.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo1_9.png)
 
 ## Demo2 Wi-Fi指纹定位
 
@@ -350,7 +352,7 @@ wifi.rssi_fluctuation(False)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo2_1.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo2_1.png)
 
 示例2，显示data/rssi_fluctuation数据：
 
@@ -360,7 +362,7 @@ wifi.rssi_fluctuation(True)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo2_2.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo2_2.png)
 
 ### Demo2.2 determineGaussian函数：查看wifi数据的高斯拟合情况
 
@@ -379,7 +381,7 @@ wifi.determineGaussian(rssi[:, 0], True, wipeRange=170*100)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo2_3.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo2_3.png)
 
 ### Demo2.3 create_fingerpirnt函数：构建一个指纹库
 
@@ -451,7 +453,7 @@ wifi.show_trace(predict, real_trace=real_trace)
 
 结果如下：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo2_4.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo2_4.png)
 
 由于wifi数据的波动非常大，因此结果会有些难看。
 
@@ -536,7 +538,7 @@ for v in S:
 
 对所有轨迹数据进行可视化：
 
-![](https://github.com/salmoshu/location/raw/master/image/Demo3_1.png)
+![](https://github.com/salmoshu/IndoorFusionNav/raw/master/image/Demo3_1.png)
 
 
 
@@ -611,6 +613,6 @@ PS C:\Users\salmo\Desktop>
 
 # 历史版本
 
-1. [初始提交版本V1.0](https://github.com/salmoshu/location/tree/207761d6d4e62300dd5a74074e8ace3996b455e9)
+1. [初始提交版本V1.0](https://github.com/salmoshu/IndoorFusionNav/tree/207761d6d4e62300dd5a74074e8ace3996b455e9)
 
    实现了融合定位的基础功能，留作自己备份，建议读者使用最新版本。

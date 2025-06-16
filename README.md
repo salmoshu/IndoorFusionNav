@@ -1,5 +1,7 @@
 # IndoorFusionNav
 
+![](https://raw.githubusercontent.com/salmoshu/Winchell-ImgBed/main/img/20250616-225547.jpg)
+
 **IndoorFusionNav**是一个基于Wi-Fi/PDR（行人航位推算）的多源融合定位项目，目前包含了Wi-Fi指纹定位、PDR与EKF融合定位的Python实现，本项目针对的平台为安卓平台，融合使用的数据为Wi-Fi数据与IMU数据。
 
 项目中涉及的Java代码主要用于采集实验数据，而数据分析与定位轨迹生成主要使用Python离线完成。该项目较为久远，在数据采集和融合时没有很好地注意不同数据源之间的时间同步问题（应当进行插值或外推）。不过这并不影响大家通过项目源码来理解Wi-Fi指纹、PDR和EKF等定位领域中的基础概念。

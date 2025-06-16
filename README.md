@@ -618,3 +618,6 @@ PS C:\Users\salmo\Desktop>
 1. [初始提交版本V1.0](https://github.com/salmoshu/IndoorFusionNav/tree/207761d6d4e62300dd5a74074e8ace3996b455e9)
 
    实现了融合定位的基础功能，留作自己备份，建议读者使用最新版本。
+
+# 许可证
+IndoorFusionNav 采用 [MIT 许可证](LICENSE)。详情见 `LICENSE` 文件。
